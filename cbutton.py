@@ -13,6 +13,8 @@ class CButton:
         qb = Button (myWin, centerPoint, radius , 'Quit')"""
 
         self.radius = radius
+        self.h = center.getX()
+        self.k = center.getY()
         self.circ = Circle(center, radius)
         self.circ.setFill('lightgray')
         self.circ.draw(win)
@@ -23,8 +25,8 @@ class CButton:
     def clicked(self, p):
         "Returns True if button is active  and p is inside"
         x, y = p.getX(), p.getY()
-        r = math.sqrt(x**2 + y**2)
-        return self.radius >= r
+        r = math.sqrt((x - self.h)**2 + (y - self.k)**2)
+        return (self.active and self.radius >= r)
 
     def getLabel(self):
         "Returns the label string of this button."
