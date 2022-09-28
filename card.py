@@ -1,3 +1,5 @@
+from graphics import GraphWin, Image, Point
+
 class Card:
     def __init__(self, rank, suit):
         self.rank = rank
@@ -16,6 +18,11 @@ class Card:
             return 10
         else:
             return self.rank
+
+    def draw(self, win, center):
+        filename = str(self.rank) + self.suit +'.ppm'
+        card1 = Image(center, filename)
+        card1.draw(win)
     
     def __str__(self):
         ranks = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
