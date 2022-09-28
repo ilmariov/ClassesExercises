@@ -1,4 +1,4 @@
-from graphics import GraphWin, Image, Point
+from graphics import Image
 
 class Card:
     def __init__(self, rank, suit):
