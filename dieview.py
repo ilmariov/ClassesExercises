@@ -1,5 +1,7 @@
 # dieview.py
 from graphics import *
+from random import randint
+
 class DieView:
     """DieView is a widget that displays a graphical representation
     of a standard six-sided die."""
@@ -10,7 +12,6 @@ class DieView:
 
         self.win = win
         self.background = 'white'
-        self.foreground = 'black'
         self.psize = 0.1 * size
         hsize = size / 2.0
         offset = 0.6 * hsize
@@ -42,6 +43,7 @@ class DieView:
 
     def setValue(self, value):
         "Set this die to display value"
+        self.value = value
         self.pip1.setFill(self.background)
         self.pip2.setFill(self.background)
         self.pip3.setFill(self.background)
@@ -50,30 +52,37 @@ class DieView:
         self.pip6.setFill(self.background)
         self.pip7.setFill(self.background)
 
-        if value == 1:
-            self.pip4.setFill(self.foreground)
-        elif value == 2:
-            self.pip1.setFill(self.foreground)
-            self.pip7.setFill(self.foreground)
-        elif value == 3:
-            self.pip1.setFill(self.foreground)
-            self.pip4.setFill(self.foreground)
-            self.pip7.setFill(self.foreground)
-        elif value == 4:
-            self.pip1.setFill(self.foreground)
-            self.pip3.setFill(self.foreground)
-            self.pip5.setFill(self.foreground)
-            self.pip7.setFill(self.foreground)
-        elif value == 5:
-            self.pip1.setFill(self.foreground)
-            self.pip3.setFill(self.foreground)
-            self.pip4.setFill(self.foreground)
-            self.pip5.setFill(self.foreground)
-            self.pip7.setFill(self.foreground)
+        r = randint(0,255)
+        g = randint(0,255)
+        b = randint(0,255)
+        foreground = color_rgb(r,g,b)
+        self.setColor(foreground)
+
+    def setColor(self, color):
+        if self.value == 1:
+            self.pip4.setFill(color)
+        elif self.value == 2:
+            self.pip1.setFill(color)
+            self.pip7.setFill(color)
+        elif self.value == 3:
+            self.pip1.setFill(color)
+            self.pip4.setFill(color)
+            self.pip7.setFill(color)
+        elif self.value == 4:
+            self.pip1.setFill(color)
+            self.pip3.setFill(color)
+            self.pip5.setFill(color)
+            self.pip7.setFill(color)
+        elif self.value == 5:
+            self.pip1.setFill(color)
+            self.pip3.setFill(color)
+            self.pip4.setFill(color)
+            self.pip5.setFill(color)
+            self.pip7.setFill(color)
         else:
-            self.pip1.setFill(self.foreground)
-            self.pip2.setFill(self.foreground)
-            self.pip3.setFill(self.foreground)
-            self.pip5.setFill(self.foreground)
-            self.pip6.setFill(self.foreground)
-            self.pip7.setFill(self.foreground)
+            self.pip1.setFill(color)
+            self.pip2.setFill(color)
+            self.pip3.setFill(color)
+            self.pip5.setFill(color)
+            self.pip6.setFill(color)
+            self.pip7.setFill(color)
