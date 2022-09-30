@@ -30,6 +30,9 @@ def main():
         elif flinch_button.clicked(pt):
             face.flinch()
             quit_button.activate()
+        elif grim_button.clicked(pt):
+            face.grim()
+            quit_button.activate()
         pt = win.getMouse()
     win.close()
 
