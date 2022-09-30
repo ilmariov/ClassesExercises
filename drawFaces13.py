@@ -21,6 +21,15 @@ def main():
         if smile_button.clicked(pt):
             face.smile()
             quit_button.activate()
+        elif wink_button.clicked(pt):
+            face.wink()
+            quit_button.activate()
+        elif frown_button.clicked(pt):
+            face.frown()
+            quit_button.activate()
+        elif flinch_button.clicked(pt):
+            face.flinch()
+            quit_button.activate()
         pt = win.getMouse()
     win.close()
 
