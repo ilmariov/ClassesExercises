@@ -1,3 +1,4 @@
+from curses import window
 from graphics import *
 import math
 
@@ -31,6 +32,7 @@ class Face:
         self.frown_pts = []
         self.leftEye_pts = []
         self.rightEye_pts = []
+        self.face = 'grim'
 
     def grim(self):
         self.__undrawing()
@@ -40,6 +42,7 @@ class Face:
         if self.booleans[4]:
             self.rightEye.draw(self.window)
         self.__set_booleans(True, False, False, False, False)
+        self.face = 'grim'
 
     def smile(self):
         self.__undrawing()
@@ -49,6 +52,7 @@ class Face:
         if self.booleans[4]:
             self.rightEye.draw(self.window)
         self.__set_booleans(False, True, False, False, False)
+        self.face = 'smile'
 
     def wink(self):
         self.__undrawing()
@@ -57,6 +61,7 @@ class Face:
         if self.booleans[4]:
             self.rightEye.draw(self.window)
         self.__set_booleans(False, True, False, True, False)
+        self.face = 'wink'
 
     def frown(self):
         self.__undrawing()
@@ -66,17 +71,39 @@ class Face:
         if self.booleans[4]:
             self.rightEye.draw(self.window)
         self.__set_booleans(False, False, True, False, False)
+        self.face = 'frown'
     
     def flinch(self):
         self.__undrawing()
         self.__frown_mouth()
         self.__left_blink()
         self.__right_blink()
-        self.__set_booleans(False, False, True, True, True) 
+        self.__set_booleans(False, False, True, True, True)
+        self.face = 'flinch'
+
+    def moveFace(self, dx, dy):
+        self.head.move(dx,dy)
+        self.leftEye.move(dx,dy)
+        self.rightEye.move(dx,dy)
+        self.grim_mouth.move(dx,dy)
+        if self.face == 'grim':
+            self.grim()
+        elif self.face == 'smile':
+            self.smile()
+        elif self.face == 'wink':
+            self.wink()
+        elif self.face == 'frown':
+            self.frown()
+        else:
+            self.flinch()
+
+    def getHeadCenter(self):
+        return self.head.getCenter()
 
     def __smile_mouth(self):
-        h = self.center.getX()
-        k = self.center.getY() + self.mouthSize/4
+        new_center = self.head.getCenter()
+        h = new_center.getX()
+        k = new_center.getY() + self.mouthSize/4
         x1 = round(h - self.mouthSize*0.65)
         x2 = round(h + self.mouthSize*0.65)
         a = self.mouthSize*0.65
@@ -87,8 +114,9 @@ class Face:
             self.smile_pts.append(pt)
 
     def __frown_mouth(self):
-        h = self.center.getX()
-        k = self.center.getY() + self.mouthSize*2/3
+        new_center = self.head.getCenter()
+        h = new_center.getX()
+        k = new_center.getY() + self.mouthSize*2/3
         x1 = round(h - self.mouthSize*0.65)
         x2 = round(h + self.mouthSize*0.65)
         a = self.mouthSize*0.65
