@@ -3,6 +3,7 @@ Provides a simple class for modeling the
 flight of projectiles."""
 
 from math import sin, cos, radians
+from random import randint
 from graphics import *
 from button import Button
 
@@ -126,3 +127,19 @@ class InputDialog:
     def close(self):
         """ close the input window """
         self.win.close()
+
+class Target:
+    def __init__(self, window, x_max):
+        '''Add a rectangle on the X-axis as a target'''
+        self.x_max = x_max
+        self.target_center = randint(1, x_max)
+        off_center = x_max/50
+        self.x1 = (self.target_center - off_center)
+        self.x2 = (self.target_center + off_center)
+        target = Rectangle(Point(self.x1, - off_center), Point(self.x2, off_center))
+        target.setFill('lightgreen')
+        target.draw(window)
+
+    def hitTarget(self, shot):
+        '''Returns True if the target is hitted'''
+        return (self.x1 < shot.getX()-3) and (shot.getX()+3 < self.x2)
