@@ -17,8 +17,8 @@ def main():
         y = pt.getY()
         Circle(Point(x,y), 1).draw(win)
         linear_reg.addPoint(x,y)
-        n = linear_reg.getN()
         pt = win.getMouse()
+    n = linear_reg.getN()
     if n >=2:
         draw_line(win, 300, 250, linear_reg)
         msg.setText('Click to exit')
